@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erfan Hamzei — AI &amp; Computer Vision Engineer</title>
+  <meta name="description" content="Mohammad Erfan Hamzei — AI Research Engineer specializing in Computer Vision, Deep Learning, and Image Processing. University of Tehran · Sharif University." />
+  <meta name="keywords" content="AI Engineer, Computer Vision, Deep Learning, YOLO, OpenCV, PyTorch, TensorFlow, Tehran" />
+  <meta property="og:title" content="Erfan Hamzei — AI &amp; Vision Systems" />
+  <meta property="og:description" content="Teaching machines to see. AI Research Engineer specializing in Computer Vision &amp; Deep Learning." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- EmailJS SDK — required for the contact form -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+</head>
+<body>
+
+<!-- ═══════════ LOADER ═══════════ -->
+<div id="loader" role="status" aria-label="Loading portfolio">
+  <div class="ld-terminal" aria-hidden="true">
+    <div class="ld-ln"><span class="ld-prompt">&gt;</span><span class="ld-txt">Initializing portfolio.js</span></div>
+    <div class="ld-ln"><span class="ld-prompt">&gt;</span><span class="ld-txt">Loading Erfan Hamzei v2025</span></div>
+    <div class="ld-ln"><span class="ld-prompt">&gt;</span><span class="ld-txt">Systems online. Ready.</span></div>
+  </div>
+  <div class="ld-bar-wrap" aria-hidden="true"><div class="ld-bar"></div></div>
+  <p class="ld-name" aria-hidden="true">Mohammad Erfan Hamzei</p>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor-glow" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+<div id="cursor-dot"  aria-hidden="true"></div>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-row">
+    <a href="#home" class="nav-logo" aria-label="Erfan Hamzei — Home">EH<span class="logo-dot">.</span></a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#resume" class="nav-cv">Resume</a>
+    <button class="hbg" id="hbg" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Overlay -->
+<div id="mob-menu" aria-hidden="true" role="navigation" aria-label="Mobile navigation">
+  <a href="#about"      class="mob-l">About</a>
+  <a href="#experience" class="mob-l">Experience</a>
+  <a href="#projects"   class="mob-l">Projects</a>
+  <a href="#skills"     class="mob-l">Skills</a>
+  <a href="#contact"    class="mob-l">Contact</a>
+  <p class="mob-foot">ehamzei40@gmail.com</p>
+</div>
+
+<main>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="home" aria-label="Introduction">
+
+  <!-- Neural canvas — renders above photo -->
+  <canvas id="neural" aria-hidden="true"></canvas>
+
+  <!-- Background photo layers -->
+  <div class="hero-bg" aria-hidden="true">
+    <img src="profile.png" alt="" class="hero-bg-img" />
+    <div class="hero-bg-ov"></div>
+    <div class="hero-bg-tint"></div>
+  </div>
+
+  <!-- AI Scanning UI — floats over face on right -->
+  <div class="hero-scan-ui" aria-hidden="true">
+    <div class="scan-frame">
+      <span class="sf-c sf-tl"></span>
+      <span class="sf-c sf-tr"></span>
+      <span class="sf-c sf-bl"></span>
+      <span class="sf-c sf-br"></span>
+      <div class="sf-scan"></div>
+      <div class="sf-tag-top">
+        <span class="sf-dot"></span>
+        <span>AI Researcher</span>
+      </div>
+      <div class="sf-tag-bot">
+        <span class="sf-line"></span>
+        <span>Tehran / Iran</span>
+      </div>
+    </div>
+    <div class="scan-status">
+      <div class="ss-item"><span>Active</span></div>
+      <div class="ss-item"><span>Vision</span></div>
+      <div class="ss-item"><span>Research</span></div>
+    </div>
+  </div>
+
+  <!-- Text content — left side -->
+  <div class="hero-body">
+    <div class="hero-left">
+
+      <div class="hero-badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span>AI Research Engineer &nbsp;·&nbsp; Computer Vision &nbsp;·&nbsp; Tehran, Iran</span>
+      </div>
+
+      <h1 class="hero-h1" aria-label="Teaching Machines to See">
+        <span class="h1-line"><span class="h1-inner">Teaching</span></span>
+        <span class="h1-line"><span class="h1-inner">Machines</span></span>
+        <span class="h1-line"><span class="h1-inner">to See.</span></span>
+      </h1>
+
+      <p class="hero-p">
+        Building intelligent vision systems that decode the visual world —
+        from real-time object detection and face recognition to image
+        restoration and neural speech synthesis.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-primary magnetic">
+          <span>View My Work</span>
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 7.5h10M8.5 3.5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="resume.pdf" download class="btn btn-ghost magnetic" aria-label="Download CV as PDF">
+          <span>Download CV</span>
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 2v8M4 7l3.5 3.5L11 7M2 12h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-green magnetic">
+          <span>Contact Me</span>
+        </a>
+      </div>
+
+      <div class="hero-meta" aria-label="Quick stats">
+        <span class="hero-coord" aria-label="Location: Tehran, Iran">35.6892° N &nbsp;&nbsp; 51.3890° E &nbsp;&nbsp; TEHRAN</span>
+        <div class="h-stat"><span class="h-stat-n">2+</span><span class="h-stat-l">Yrs Research</span></div>
+        <div class="h-stat"><span class="h-stat-n">8+</span><span class="h-stat-l">AI Projects</span></div>
+        <div class="h-stat"><span class="h-stat-n">5+</span><span class="h-stat-l">CV Models</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="scroll-ln"></div>
+    <span>Scroll</span>
+  </div>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section id="about" class="section" aria-label="About me">
+  <div class="wrap">
+    <div class="about-grid">
+
+      <div class="about-left rvl">
+        <p class="eyebrow">About</p>
+        <h2 class="s-title">Engineering<br><span style="color:var(--ac)">Perception.</span></h2>
+        <p class="about-big">
+          Where <em>deep learning</em> meets the real world —
+          building systems that don't just process images,
+          they <em>understand</em> them.
+        </p>
+        <p class="about-p">
+          I'm Erfan, a Geomatics Engineering student at the University of Tehran, pursuing a focused research track in
+          Computer Vision and Artificial Intelligence. Two years of hands-on research — at Sharif University's Electronics
+          Research Institute and the University of Tehran — have shaped me into an engineer who bridges theoretical depth
+          with practical deployment.
+        </p>
+        <p class="about-p">
+          My work spans real-time object detection, Persian OCR pipelines, facial recognition systems, generative image
+          restoration, and neural speech synthesis. I'm drawn to problems at the intersection of perception and intelligence —
+          where algorithms learn to see the world as humans do.
+        </p>
+      </div>
+
+      <div class="about-right rvr">
+        <div class="about-cards">
+          <div class="acard rv">
+            <div class="acard-ico" aria-hidden="true">CV</div>
+            <h4>Computer Vision</h4>
+            <p>Object detection, face recognition, and real-time scene understanding.</p>
+          </div>
+          <div class="acard rv">
+            <div class="acard-ico" aria-hidden="true">DL</div>
+            <h4>Deep Learning</h4>
+            <p>Model training, fine-tuning, and deployment with PyTorch &amp; TensorFlow.</p>
+          </div>
+          <div class="acard rv">
+            <div class="acard-ico" aria-hidden="true">IP</div>
+            <h4>Image Processing</h4>
+            <p>Enhancement, super-resolution, OCR, and generative model restoration.</p>
+          </div>
+          <div class="acard rv">
+            <div class="acard-ico" aria-hidden="true">AI</div>
+            <h4>Applied AI</h4>
+            <p>End-to-end pipeline engineering from raw data to deployed production systems.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ EXPERIENCE & EDUCATION ═══════════ -->
+<section id="experience" class="section" aria-label="Experience and education">
+  <div class="wrap">
+    <div class="rv">
+      <p class="eyebrow">Experience &amp; Education</p>
+      <h2 class="s-title">Research<br>Track Record.</h2>
+      <p class="s-sub" style="margin-bottom:64px">Two years of continuous research experience across Iran's leading technical universities.</p>
+    </div>
+
+    <div class="tl-wrap">
+      <div class="tl-track"><div class="tl-fill" id="tl-fill"></div></div>
+
+      <div class="tl-item rv">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <p class="tl-kind">Work Experience</p>
+        <div class="tl-card">
+          <p class="tl-date">Sep 2023 — Sep 2024</p>
+          <h3 class="tl-role">AI Research Assistant</h3>
+          <p class="tl-org">Electronics Research Institute, Sharif University of Technology</p>
+          <ul class="tl-pts">
+            <li>Contributed to machine learning and computer vision research at one of Iran's premier research institutes.</li>
+            <li>Developed and evaluated deep learning models for real-world object detection and recognition tasks.</li>
+            <li>Fine-tuned YOLO variants on custom datasets, achieving high accuracy in real-time inference scenarios.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item rv">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <p class="tl-kind">Work Experience</p>
+        <div class="tl-card">
+          <p class="tl-date">Sep 2022 — Sep 2023</p>
+          <h3 class="tl-role">Research Assistant</h3>
+          <p class="tl-org">University of Tehran — Faculty of Geomatics Engineering</p>
+          <ul class="tl-pts">
+            <li>Assisted faculty in research on image processing algorithms and scientific data analysis.</li>
+            <li>Participated in the development of AI-focused academic applications and experimental pipelines.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item rv">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <p class="tl-kind">Education</p>
+        <div class="tl-card">
+          <p class="tl-date">Sep 2021 — Present</p>
+          <h3 class="tl-role">B.Sc. Geomatics Engineering</h3>
+          <p class="tl-org">University of Tehran</p>
+          <ul class="tl-pts">
+            <li>Studying spatial data science, remote sensing, and geospatial intelligence.</li>
+            <li>Primary research focus: computer vision, deep learning, and AI-based image processing.</li>
+            <li>Currently in 6th semester with strong academic standing and active research involvement.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ PROJECTS ═══════════ -->
+<section id="projects" class="section" aria-label="Selected projects">
+  <div class="wrap">
+    <div class="proj-header rv">
+      <div>
+        <p class="eyebrow">Selected Projects</p>
+        <h2 class="s-title">Vision Systems<br>Built to Ship.</h2>
+        <p class="s-sub">Real-world AI applications spanning detection, recognition, restoration, and synthesis.</p>
+      </div>
+      <span class="proj-count" aria-hidden="true">06</span>
+    </div>
+
+    <div class="proj-grid">
+
+      <!-- 01 — Featured -->
+      <article class="pcard proj-feat rv" aria-label="Object Detection with YOLO">
+        <div class="pcard-top"><span class="pcard-n">01</span><span class="pcard-ext" aria-hidden="true">↗</span></div>
+        <p class="pcat">Computer Vision</p>
+        <h3 class="ptitle">Intelligent Object Detection Engine</h3>
+        <p class="pdesc">
+          Production-grade detection pipeline built with YOLOv5, YOLOv8, and next-generation variants (v10, v11).
+          Applied to vehicle classification, PPE compliance monitoring, and smart surveillance. Models fine-tuned on
+          custom datasets for high-accuracy real-time inference in demanding environments.
+        </p>
+        <p class="presult">→ Real-time detection deployed for smart surveillance and safety monitoring</p>
+        <div class="ptags">
+          <span class="ptag">YOLOv8</span><span class="ptag">YOLOv5</span><span class="ptag">PyTorch</span>
+          <span class="ptag">OpenCV</span><span class="ptag">Python</span><span class="ptag">Custom Datasets</span>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="pcard rv" aria-label="Persian OCR Pipeline">
+        <div class="pcard-top"><span class="pcard-n">02</span><span class="pcard-ext" aria-hidden="true">↗</span></div>
+        <p class="pcat">Image Processing · NLP</p>
+        <h3 class="ptitle">Persian OCR Pipeline</h3>
+        <p class="pdesc">
+          End-to-end OCR system optimized for Persian/Farsi text. Covers license plate recognition, Iranian national
+          ID card digitization, and scanned document processing. Advanced preprocessing handles noisy, low-resolution inputs.
+        </p>
+        <p class="presult">→ Automated document digitization at institutional scale</p>
+        <div class="ptags">
+          <span class="ptag">Tesseract</span><span class="ptag">OpenCV</span>
+          <span class="ptag">Python</span><span class="ptag">Preprocessing</span>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="pcard rv" aria-label="Face Recognition and Emotion Detection">
+        <div class="pcard-top"><span class="pcard-n">03</span><span class="pcard-ext" aria-hidden="true">↗</span></div>
+        <p class="pcat">Computer Vision · Affective AI</p>
+        <h3 class="ptitle">Face Recognition &amp; Emotion Intelligence</h3>
+        <p class="pdesc">
+          Real-time dual-function system combining facial identity verification (FaceNet + Dlib) with emotional state
+          classification (PF-ViT). Detects six emotional states with facial landmark alignment for performance across
+          varying lighting conditions.
+        </p>
+        <p class="presult">→ Smart authentication + live emotion monitoring system</p>
+        <div class="ptags">
+          <span class="ptag">FaceNet</span><span class="ptag">Dlib</span>
+          <span class="ptag">PF-ViT</span><span class="ptag">Python</span><span class="ptag">Deep Learning</span>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="pcard rv" aria-label="Image Super-Resolution and Restoration">
+        <div class="pcard-top"><span class="pcard-n">04</span><span class="pcard-ext" aria-hidden="true">↗</span></div>
+        <p class="pcat">Generative AI · Restoration</p>
+        <h3 class="ptitle">Image Super-Resolution &amp; Restoration</h3>
+        <p class="pdesc">
+          State-of-the-art generative pipeline for restoring and enhancing degraded imagery. Specializing in
+          facial feature reconstruction in surveillance footage, archival photo restoration, and profile image
+          enhancement using CodeFormer, Real-ESRGAN, and GFPGAN.
+        </p>
+        <p class="presult">→ Restoration pipeline for surveillance and archival photography</p>
+        <div class="ptags">
+          <span class="ptag">CodeFormer</span><span class="ptag">GFPGAN</span>
+          <span class="ptag">Real-ESRGAN</span><span class="ptag">Python</span><span class="ptag">GANs</span>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="pcard rv" aria-label="Text-to-Speech Generation">
+        <div class="pcard-top"><span class="pcard-n">05</span><span class="pcard-ext" aria-hidden="true">↗</span></div>
+        <p class="pcat">Speech AI · NLP</p>
+        <h3 class="ptitle">Neural Text-to-Speech Engine</h3>
+        <p class="pdesc">
+          Deep learning–powered TTS system generating natural-sounding Persian and English speech with emotion and
+          intonation control. Built on Bark and VITS architectures. Used in voice assistants, audiobook generation,
+          and accessibility tools.
+        </p>
+        <p class="presult">→ Bilingual speech synthesis with human-level prosody</p>
+        <div class="ptags">
+          <span class="ptag">Bark</span><span class="ptag">VITS</span>
+          <span class="ptag">Python</span><span class="ptag">NLP</span><span class="ptag">Audio DL</span>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article class="pcard rv" aria-label="AI Telegram Bot">
+        <div class="pcard-top"><span class="pcard-n">06</span><span class="pcard-ext" aria-hidden="true">↗</span></div>
+        <p class="pcat">Full-Stack AI · Integration</p>
+        <h3 class="ptitle">AI-Powered Telegram Platform</h3>
+        <p class="pdesc">
+          Multi-functional Telegram bot integrating all core AI capabilities into a unified conversational interface:
+          object detection, OCR, face recognition, and emotion analysis. Processes image inputs in real-time with
+          instant AI-powered feedback via a single chat interface.
+        </p>
+        <p class="presult">→ Unified AI assistant accessible to anyone via Telegram</p>
+        <div class="ptags">
+          <span class="ptag">Python</span><span class="ptag">Telegram Bot API</span>
+          <span class="ptag">Computer Vision</span><span class="ptag">OCR</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ SKILLS ═══════════ -->
+<section id="skills" class="section" aria-label="Technical skills">
+  <div class="wrap">
+    <div class="rv">
+      <p class="eyebrow">Technical Skills</p>
+      <h2 class="s-title">The Toolkit.</h2>
+      <p class="s-sub">Languages, frameworks, and tools powering every project.</p>
+    </div>
+    <div class="sk-grid">
+      <div class="sk-cat rv">
+        <h3 class="sk-head">AI / Deep Learning</h3>
+        <div class="chips">
+          <span class="chip">TensorFlow</span><span class="chip">PyTorch</span>
+          <span class="chip">Scikit-learn</span><span class="chip">OpenCV</span>
+          <span class="chip">NumPy</span><span class="chip">Pandas</span>
+        </div>
+      </div>
+      <div class="sk-cat rv">
+        <h3 class="sk-head">Computer Vision</h3>
+        <div class="chips">
+          <span class="chip">YOLOv5/v8</span><span class="chip">FaceNet</span>
+          <span class="chip">Dlib</span><span class="chip">PF-ViT</span>
+          <span class="chip">Real-ESRGAN</span><span class="chip">CodeFormer</span>
+          <span class="chip">GFPGAN</span><span class="chip">LaMa</span>
+        </div>
+      </div>
+      <div class="sk-cat rv">
+        <h3 class="sk-head">Programming</h3>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">JavaScript ES6</span>
+          <span class="chip">C++</span><span class="chip">MATLAB</span>
+        </div>
+      </div>
+      <div class="sk-cat rv">
+        <h3 class="sk-head">Web Development</h3>
+        <div class="chips">
+          <span class="chip">React.js</span><span class="chip">HTML5 / CSS3</span>
+          <span class="chip">Tailwind CSS</span><span class="chip">Bootstrap 5</span>
+        </div>
+      </div>
+      <div class="sk-cat rv">
+        <h3 class="sk-head">NLP / Speech</h3>
+        <div class="chips">
+          <span class="chip">Tesseract OCR</span><span class="chip">Bark</span>
+          <span class="chip">VITS</span><span class="chip">TextBlob</span><span class="chip">NLTK</span>
+        </div>
+      </div>
+      <div class="sk-cat rv">
+        <h3 class="sk-head">Tools &amp; Platforms</h3>
+        <div class="chips">
+          <span class="chip">Git / GitHub</span><span class="chip">Linux</span>
+          <span class="chip">Jupyter</span><span class="chip">VS Code</span>
+          <span class="chip">Telegram Bot API</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ STATS ═══════════ -->
+<section id="achievements" class="section" aria-label="Achievements and statistics">
+  <div class="wrap">
+    <div class="rv">
+      <p class="eyebrow">By the Numbers</p>
+      <h2 class="s-title">Impact.</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card rv" data-target="8">
+        <div class="s-val"><span class="cnt">0</span><sup>+</sup></div>
+        <p class="s-lbl">AI Projects Built &amp; Deployed</p>
+      </div>
+      <div class="stat-card rv" data-target="2">
+        <div class="s-val"><span class="cnt">0</span></div>
+        <p class="s-lbl">Research Positions Held</p>
+      </div>
+      <div class="stat-card rv" data-target="5">
+        <div class="s-val"><span class="cnt">0</span><sup>+</sup></div>
+        <p class="s-lbl">CV Models Deployed</p>
+      </div>
+      <div class="stat-card rv" data-target="3">
+        <div class="s-val"><span class="cnt">0</span><sup>+</sup></div>
+        <p class="s-lbl">Years of Continuous Coding</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ RESUME CTA ═══════════ -->
+<section id="resume" class="section" aria-label="Resume download">
+  <div class="wrap">
+    <div class="resume-box rvs">
+      <h2>Read the Full Story.</h2>
+      <p>My resume covers every project, position, and technical detail in one polished document. Download it or view it directly in your browser.</p>
+      <div class="resume-btns">
+        <a href="resume.pdf" download class="btn btn-primary magnetic" aria-label="Download resume as PDF">
+          <span>Download CV</span>
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 2v8M4 7l3.5 3.5L11 7M2 12h11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-ghost magnetic" aria-label="View resume online (opens in new tab)">
+          <span>View Online</span>
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M3 12L12 3M12 3H7M12 3v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section id="contact" class="section" aria-label="Contact information">
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <div class="rvl">
+        <p class="eyebrow">Contact</p>
+        <h2 class="contact-h">Let's Build<br>Something<br><span class="cac">Exceptional.</span></h2>
+        <p class="contact-p">Open to research collaborations, internship opportunities, and AI projects that push the boundaries of what vision systems can do.</p>
+
+        <div class="c-links">
+          <a href="mailto:ehamzei40@gmail.com" class="clink" aria-label="Send email to Erfan Hamzei">
+            <span class="clink-ico" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4L8 9L14 4M2 4h12v8H2V4z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="clink-body">
+              <span class="clink-lbl">Email</span>
+              <span class="clink-val">ehamzei40@gmail.com</span>
+            </span>
+            <span class="clink-arr" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- [REPLACE] Update the href below with your actual GitHub profile URL -->
+          <a href="https://github.com/erfanhamzei" target="_blank" rel="noopener noreferrer" class="clink" aria-label="GitHub profile (opens in new tab)">
+            <span class="clink-ico" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="clink-body">
+              <span class="clink-lbl">GitHub</span>
+              <span class="clink-val">github.com/erfanhamzei</span>
+            </span>
+            <span class="clink-arr" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- [REPLACE] Update href with your exact LinkedIn URL if different -->
+          <a href="https://linkedin.com/in/erfan-hamzei" target="_blank" rel="noopener noreferrer" class="clink" aria-label="LinkedIn profile (opens in new tab)">
+            <span class="clink-ico" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <span class="clink-body">
+              <span class="clink-lbl">LinkedIn</span>
+              <span class="clink-val">linkedin.com/in/erfan-hamzei</span>
+            </span>
+            <span class="clink-arr" aria-hidden="true">↗</span>
+          </a>
+
+          <a href="tel:+989362646244" class="clink" aria-label="Call Erfan Hamzei">
+            <span class="clink-ico" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 018.63 18.9 19.5 19.5 0 014.07 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013 1.28h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="clink-body">
+              <span class="clink-lbl">Phone</span>
+              <span class="clink-val">+98 936 264 6244</span>
+            </span>
+            <span class="clink-arr" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="c-visual rvr" aria-hidden="true">
+        <div class="orb-out">
+          <div class="orb-txt">
+            <span class="orb-big">EH.</span>
+            <span class="orb-sub">Let's Connect</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<div class="divider"></div>
+
+<!-- ═══════════ CONTACT FORM ═══════════ -->
+<section id="send" class="section" aria-label="Send a message">
+  <div class="wrap">
+    <div class="form-card rvs">
+
+      <div class="form-grid">
+
+        <!-- LEFT: statement + info -->
+        <div class="form-left rv">
+          <p class="eyebrow">Direct Message</p>
+          <h2>Write to Me<br><span style="color:var(--ac)">Directly.</span></h2>
+          <p class="f-sub">Fill out the form and I'll get back to you within 24 hours. All inquiries welcome.</p>
+
+          <div class="form-info">
+            <div class="fi-row">
+              <span class="fi-ico" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4L8 9L14 4M2 4h12v8H2V4z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span>ehamzei40@gmail.com</span>
+            </div>
+            <div class="fi-row">
+              <span class="fi-ico" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              <span>Response within 24 hours</span>
+            </div>
+            <div class="fi-row">
+              <span class="fi-ico" aria-hidden="true">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" stroke="currentColor" stroke-width="1.5"/></svg>
+              </span>
+              <span>Open to global opportunities</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: form -->
+        <div class="form-right rv">
+          <form id="form-contact" novalidate autocomplete="off">
+
+            <div class="f-row">
+              <div class="inp-g">
+                <input type="text" id="f-name" name="from_name" placeholder=" " required autocomplete="name" aria-required="true" />
+                <label for="f-name">Your Name</label>
+                <span class="inp-line" aria-hidden="true"></span>
+                <span class="inp-err" role="alert">Please enter your name</span>
+              </div>
+              <div class="inp-g">
+                <input type="email" id="f-email" name="from_email" placeholder=" " required autocomplete="email" aria-required="true" />
+                <label for="f-email">Email Address</label>
+                <span class="inp-line" aria-hidden="true"></span>
+                <span class="inp-err" role="alert">Enter a valid email address</span>
+              </div>
+            </div>
+
+            <div class="inp-g">
+              <input type="text" id="f-subject" name="subject" placeholder=" " required aria-required="true" />
+              <label for="f-subject">Subject</label>
+              <span class="inp-line" aria-hidden="true"></span>
+              <span class="inp-err" role="alert">Please enter a subject</span>
+            </div>
+
+            <div class="inp-g" style="margin-bottom:44px">
+              <textarea id="f-message" name="message" placeholder=" " required rows="5" maxlength="1000" aria-required="true"></textarea>
+              <label for="f-message">Your Message</label>
+              <span class="inp-line" aria-hidden="true"></span>
+              <span class="inp-err" role="alert">Please write your message</span>
+              <span class="char-count" aria-live="polite"><span id="char-num">0</span>&thinsp;/&thinsp;1000</span>
+            </div>
+
+            <button type="submit" class="form-btn" id="form-send-btn" aria-label="Send message">
+              <span class="btn-label">Send Message</span>
+              <span class="btn-ico" aria-hidden="true">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+              <span class="btn-ok" aria-hidden="true">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Message Sent!
+              </span>
+              <span class="btn-fail" aria-hidden="true">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01M22 12a10 10 0 11-20 0 10 10 0 0120 0z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Failed — Try Again
+              </span>
+            </button>
+
+            <p class="ejs-note">
+              Powered by <a href="https://www.emailjs.com" target="_blank" rel="noopener">EmailJS</a>.
+              Replace the keys in <code>script.js</code> to activate email delivery.
+            </p>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="foot-row">
+    <p class="foot-copy">© 2025 Mohammad Erfan Hamzei. All rights reserved.</p>
+    <div class="foot-links">
+      <a href="mailto:ehamzei40@gmail.com" aria-label="Email">Email</a>
+      <a href="https://github.com/erfanhamzei" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+      <a href="https://linkedin.com/in/erfan-hamzei" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Script -->
+<script src="script.js"></script>
+</body>
+</html>
