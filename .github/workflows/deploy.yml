@@ -40,6 +40,12 @@ jobs:
         # carry that prefix. Derived from the repo name rather than hardcoded.
         env:
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+          # Contact form delivery. The build is static, so these are read at
+          # build time and baked into the page. Empty is fine: the form then
+          # tells the visitor to email directly instead of failing silently.
+          NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+          NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
         run: npm run build
 
       - uses: actions/configure-pages@v5
