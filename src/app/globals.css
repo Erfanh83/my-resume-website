@@ -1,0 +1,395 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════
+   DESIGN TOKENS — DARK (the brand default)
+   Palette carried over from the previous site: near-black ground,
+   signal green accent. Amber is the one addition — a status board
+   needs a second state colour to stay honest about what is and
+   is not shipped.
+   ═══════════════════════════════════════════════════════════ */
+@theme {
+  --color-ink: #050905;
+  --color-ink-2: #090f09;
+  --color-ink-3: #0e160e;
+  --color-ink-4: #141d14;
+  --color-line: #1b271b;
+
+  --color-signal: #00ff88;
+  --color-signal-dim: #00c46b;
+  --color-signal-deep: #04301f;
+
+  --color-amber: #ffb627;
+  --color-amber-deep: #2e2209;
+
+  --color-chalk: #e8f0e8;
+  --color-slate: #93a593;
+  --color-slate-dim: #5d6f5d;
+
+  /* Hairline grid behind the hero — needs its own token because it
+     must invert with the theme, unlike a fixed white overlay. */
+  --color-grid: #ffffff0f;
+
+  --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-body: var(--font-plex-sans), "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  /* Never reassigned per locale — Latin runs inside Persian copy use this. */
+  --font-latin: var(--font-plex-sans), "IBM Plex Sans", system-ui, sans-serif;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DESIGN TOKENS — LIGHT
+   Not an inversion. The ground is a faintly green-tinted paper and
+   the accent darkens to #00854a, because #00ff88 on white is roughly
+   1.4:1 and unreadable. Filled buttons keep working because --color-ink
+   lightens in step, so bg-signal/text-ink stays dark-on-light-text.
+   ═══════════════════════════════════════════════════════════ */
+:root[data-theme="light"] {
+  --color-ink: #f3f6f2;
+  --color-ink-2: #ffffff;
+  --color-ink-3: #eaeee7;
+  --color-ink-4: #e1e7dd;
+  --color-line: #d5dcd1;
+
+  --color-signal: #00854a;
+  --color-signal-dim: #046b3d;
+  --color-signal-deep: #dcf3e6;
+
+  --color-amber: #8a5a00;
+  --color-amber-deep: #fbeed3;
+
+  --color-chalk: #0c1410;
+  --color-slate: #4f5f55;
+  --color-slate-dim: #6f7f74;
+
+  --color-grid: #0c141012;
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCRIPT
+   Persian swaps every text role to Vazirmatn — a face actually drawn
+   for the script. Archivo and IBM Plex carry no Arabic glyphs, so
+   without this the browser silently falls back to a system serif.
+   Written as :root[lang="fa"] rather than [lang="fa"] so it outranks
+   the :root that @theme emits, whatever the layer order.
+   ═══════════════════════════════════════════════════════════ */
+:root[lang="fa"] {
+  --font-display: var(--font-vazir), "Vazirmatn", system-ui, sans-serif;
+  --font-body: var(--font-vazir), "Vazirmatn", system-ui, sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════ */
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Sticky header clearance for anchor jumps. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-chalk);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Persian text runs a touch larger and looser — Vazirmatn's
+     x-height and the script's density both ask for it. */
+  [lang="fa"] body {
+    font-size: 1.0625rem;
+    line-height: 1.85;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+  }
+
+  [lang="fa"] h1,
+  [lang="fa"] h2,
+  [lang="fa"] h3,
+  [lang="fa"] h4 {
+    letter-spacing: 0;
+    line-height: 1.35;
+    font-weight: 800;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-line);
+    border: 3px solid var(--color-ink);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-signal-dim);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COMPONENT UTILITIES
+   ═══════════════════════════════════════════════════════════ */
+@layer components {
+  /* Page gutter — one place, so section padding never fights itself. */
+  .shell {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .shell {
+      padding-inline: 3rem;
+    }
+  }
+
+  /* Small caps data label — used for eyebrows, table heads, statuses. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  [lang="fa"] .label {
+    font-family: var(--font-body);
+    letter-spacing: 0;
+    font-size: 0.8125rem;
+    text-transform: none;
+  }
+
+  /* A Latin term ("Next.js") sitting inside Persian copy. Keeps the Latin
+     face and its own LTR run so Vazirmatn fallbacks never render it. */
+  .latin {
+    font-family: var(--font-latin);
+    font-feature-settings: "tnum" 0;
+  }
+  [lang="fa"] .latin {
+    letter-spacing: 0;
+  }
+
+  /* Hairline that fades at both ends — the page's one repeated ornament. */
+  .hairline {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-line) 15%,
+      var(--color-line) 85%,
+      transparent
+    );
+  }
+
+  /* The hero photograph, dissolved into the page instead of boxed.
+     A mask is used rather than a gradient overlay because a mask makes the
+     pixels transparent — so the same rule works on the near-black ground
+     and on the light theme's paper, with no colour to keep in sync.
+
+     Phone: the photo is a band across the top, fading out downward.
+     Desktop: it is pinned to the inline-end side, fading toward the text
+     and along the bottom. Two gradients intersect to do both at once. */
+  .hero-photo {
+    -webkit-mask-image: linear-gradient(to bottom, #000 42%, transparent 97%);
+    mask-image: linear-gradient(to bottom, #000 42%, transparent 97%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-photo {
+      -webkit-mask-image:
+        linear-gradient(to left, #000 22%, transparent 94%),
+        linear-gradient(to top, transparent 1%, #000 32%);
+      mask-image:
+        linear-gradient(to left, #000 22%, transparent 94%),
+        linear-gradient(to top, transparent 1%, #000 32%);
+      -webkit-mask-composite: source-in;
+      mask-composite: intersect;
+    }
+
+    /* Persian reads right to left, so the photo sits on the left and has to
+       fade the other way. */
+    [dir="rtl"] .hero-photo {
+      -webkit-mask-image:
+        linear-gradient(to right, #000 22%, transparent 94%),
+        linear-gradient(to top, transparent 1%, #000 32%);
+      mask-image:
+        linear-gradient(to right, #000 22%, transparent 94%),
+        linear-gradient(to top, transparent 1%, #000 32%);
+    }
+  }
+
+  /* A near-black photograph sitting on paper is a strong note; ease it a
+     little so it reads as a panel rather than a hole. */
+  :root[data-theme="light"] .hero-photo {
+    opacity: 0.88;
+  }
+
+  /* Full-bleed photographic band. Scrims come from the ink token, so the
+     band melts into whichever theme is showing. */
+  .band-scrim {
+    background-image: linear-gradient(
+      to bottom,
+      var(--color-ink) 0%,
+      transparent 28%,
+      transparent 62%,
+      var(--color-ink) 100%
+    );
+  }
+
+  /* Hero backdrop. Both layers read from tokens so the light theme is a
+     real design rather than a washed-out copy of the dark one. */
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   THEME SWITCHING
+   Colour transitions are opt-in: the class is added for the length of
+   one switch, so page load and scrolling never pay for them.
+   ═══════════════════════════════════════════════════════════ */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition:
+    background-color 0.32s var(--ease-out-quint),
+    border-color 0.32s var(--ease-out-quint),
+    color 0.32s var(--ease-out-quint),
+    fill 0.32s var(--ease-out-quint) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MOTION
+   One shared reveal, driven by an IntersectionObserver that sets
+   data-shown. Anything decorative stops entirely under
+   prefers-reduced-motion.
+   ═══════════════════════════════════════════════════════════ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s var(--ease-out-quint),
+    transform 0.7s var(--ease-out-quint);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal][data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+.status-dot-live {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+/* The toggle shows the destination, not the current state: a sun while dark
+   (click for light), a moon while light. Driven from data-theme in CSS so it
+   is right on the first frame, before any JavaScript runs. */
+.theme-icon {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition:
+    opacity 0.35s var(--ease-out-quint),
+    transform 0.35s var(--ease-out-quint);
+}
+
+:root[data-theme="dark"] .theme-icon-sun,
+:root[data-theme="light"] .theme-icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+:root[data-theme="dark"] .theme-icon-moon,
+:root[data-theme="light"] .theme-icon-sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,8 @@
+# The repo is edited on Windows and built on Ubuntu in CI. Normalise to LF in
+# the repository so the two never disagree about a file's contents.
+* text=auto eol=lf
+
+*.png binary
+*.webp binary
+*.jpg binary
+*.pdf binary
