@@ -5,7 +5,7 @@ import { Reveal } from "./ui/reveal";
 
 export function Capabilities({ c, locale }: { c: Content; locale: Locale }) {
   return (
-    <section className="py-24 sm:py-32" aria-label={c.capabilities.title}>
+    <section className="render-lazy py-24 sm:py-32" aria-label={c.capabilities.title}>
       <div className="shell">
         <SectionHead
           eyebrow={c.capabilities.eyebrow}
@@ -14,7 +14,7 @@ export function Capabilities({ c, locale }: { c: Content; locale: Locale }) {
         />
 
         {/* Three stages of one pipeline, so they read left to right as a sequence. */}
-        <ol className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
+        <ol className="mt-14 grid gap-px overflow-clip rounded-2xl border border-line bg-line lift md:grid-cols-3">
           {c.capabilities.items.map((item, i) => (
             <Reveal
               key={item.id}

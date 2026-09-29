@@ -38,7 +38,7 @@ export const en: Content = {
     secondaryCta: "Start a project",
     stats: [
       { value: "5", label: "Years freelancing" },
-      { value: "6", label: "Client sites" },
+      { value: "8", label: "Client sites" },
       { value: "2", label: "Research posts" },
     ],
     portraitAlt: "Mohammad Erfan Hamzei",
@@ -122,6 +122,18 @@ export const en: Content = {
 
   sites: [
     {
+      id: "palazo",
+      name: "Palazo",
+      domain: "palazo.ir",
+      url: "https://palazo.ir",
+      kind: "E-commerce",
+      location: "Hamedan",
+      status: "live",
+      summary:
+        "An online store for a children's clothing shop, newborn to age 15. Parents can shop by age or by category, and the whole storefront is built to be browsed and ordered from a phone.",
+      stack: ["Online store", "Shop by age", "Responsive UI", "SEO"],
+    },
+    {
       id: "afkarino",
       name: "Afkarino",
       domain: "afkarino.com",
@@ -142,6 +154,18 @@ export const en: Content = {
       summary:
         "A café site built around the menu and the room. Tuned for accessibility, load speed, and a layout that holds up on every screen from a wide desktop to a phone held one-handed.",
       stack: ["React", "Responsive UI", "Accessibility", "Performance"],
+    },
+    {
+      id: "vanil",
+      name: "Vanil Café",
+      domain: "vanilhmd.ir",
+      url: "https://vanilhmd.ir",
+      kind: "Café",
+      location: "Hamedan",
+      status: "live",
+      summary:
+        "A digital menu for a specialty café. Hot and cold drinks sorted into categories, instant search across the whole menu, and a layout made for a phone held at the table.",
+      stack: ["Digital menu", "Menu search", "Responsive UI"],
     },
     {
       id: "casablanca",
@@ -173,7 +197,7 @@ export const en: Content = {
     },
     {
       id: "binhayat",
-      name: "Binhayat",
+      name: "Bi Nahayat",
       kind: "Business",
       status: "build",
       summary:

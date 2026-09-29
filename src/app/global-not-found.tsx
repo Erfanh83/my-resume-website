@@ -2,7 +2,8 @@ import { withBase } from "@/lib/paths";
 
 /* Root-level 404. Lives outside [locale], so it stays language-neutral and
    carries its own styles — the theme script and stylesheet belong to the
-   locale tree and never run here. */
+   locale tree and never run here. A global-not-found rather than not-found:
+   there is no app/layout.tsx for a plain not-found to render inside. */
 export default function NotFound() {
   return (
     <html lang="en">

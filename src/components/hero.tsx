@@ -9,7 +9,7 @@ export function Hero({ c }: { c: Content }) {
   return (
     <section
       id="home"
-      className="relative overflow-hidden pb-16 pt-[16rem] sm:pt-[19rem] lg:pb-24 lg:pt-36"
+      className="relative overflow-hidden pb-16 pt-[16rem] sm:pt-[19rem] lg:pb-24 lg:pt-36 light:pt-[22rem] sm:light:pt-[25.5rem] lg:light:pt-36"
       aria-label={c.hero.headline.join(" ")}
     >
       {/* Ambient ground */}
@@ -23,7 +23,7 @@ export function Hero({ c }: { c: Content }) {
           the page rather than sitting on it. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[23rem] sm:h-[26rem] lg:inset-y-0 lg:start-auto lg:end-0 lg:h-auto lg:w-[58%] xl:w-[54%]"
+        className="hero-media pointer-events-none absolute inset-x-0 top-0 -z-10 h-[23rem] sm:h-[26rem] lg:inset-y-0 lg:start-auto lg:end-0 lg:h-auto lg:w-[58%] xl:w-[54%]"
       >
         <Image
           src={withBase("/hero.webp")}
@@ -34,14 +34,14 @@ export function Hero({ c }: { c: Content }) {
           className="hero-photo object-cover object-[50%_12%] lg:object-[46%_22%]"
         />
         {/* Picks up the green already in the photograph and lets it carry
-            outward into the section. */}
-        <div className="absolute inset-0 bg-signal/[0.04] mix-blend-plus-lighter" />
+            outward into the section. Masked like the photo, or its edge shows. */}
+        <div className="hero-tint hero-photo absolute inset-0 bg-signal/[0.04] mix-blend-plus-lighter" />
       </div>
 
       <div className="shell relative">
         <div className="lg:max-w-[60%]">
           <Reveal>
-            <p className="label inline-flex items-center gap-2.5 rounded-full border border-signal/25 bg-signal-deep/50 px-3.5 py-2 text-signal backdrop-blur-sm">
+            <p className="label inline-flex items-center gap-2.5 rounded-full border border-signal/25 bg-signal-deep/80 px-3.5 py-2 text-signal">
               <span
                 aria-hidden="true"
                 className="status-dot-live h-1.5 w-1.5 rounded-full bg-signal"
@@ -97,7 +97,7 @@ export function Hero({ c }: { c: Content }) {
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-ink/40 px-6 py-3.5 font-medium text-chalk backdrop-blur-sm transition-colors duration-200 hover:border-signal/45 hover:text-signal"
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-ink/75 px-6 py-3.5 font-medium text-chalk transition-colors duration-200 hover:border-signal/45 hover:text-signal"
               >
                 {c.hero.secondaryCta}
               </a>
@@ -105,11 +105,11 @@ export function Hero({ c }: { c: Content }) {
           </Reveal>
 
           <Reveal delay={560}>
-            <dl className="mt-10 grid max-w-xl grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line">
+            <dl className="mt-10 grid max-w-xl grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line lift">
               {c.hero.stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="bg-ink-2/90 px-4 py-4 backdrop-blur-sm sm:px-5 sm:py-5"
+                  className="bg-ink-2 px-4 py-4 sm:px-5 sm:py-5"
                 >
                   <dt className="sr-only">{stat.label}</dt>
                   <dd>

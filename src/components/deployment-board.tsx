@@ -4,7 +4,8 @@ import { Reveal } from "./ui/reveal";
 /**
  * The page's signature element: every client site, with its real
  * current state. Status is information carried from the CV, not
- * decoration — two are live, two are in final QA, two are being built.
+ * decoration — which sites are live, which are in final QA, which are
+ * still being built.
  */
 export function DeploymentBoard({ c }: { c: Content }) {
   const order: Record<DeployStatus, number> = { live: 0, qa: 1, build: 2 };
@@ -14,7 +15,7 @@ export function DeploymentBoard({ c }: { c: Content }) {
     <section className="pb-20 pt-4 sm:pb-24" aria-label={c.board.title}>
       <div className="shell">
         <Reveal>
-          <div className="overflow-hidden rounded-2xl border border-line bg-ink-2/70 backdrop-blur-sm">
+          <div className="overflow-hidden rounded-2xl border border-line bg-ink-2 lift">
         {/* Board head */}
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-line px-5 py-4 sm:px-7 sm:py-5">
           <h2 className="label flex items-center gap-2.5 text-chalk">
@@ -60,7 +61,7 @@ export function DeploymentBoard({ c }: { c: Content }) {
                       {site.domain ? (
                         <span
                           dir="ltr"
-                          className="font-mono text-[0.78rem] text-signal-dim decoration-signal/40 underline-offset-4 group-hover:underline"
+                          className="font-code text-[0.78rem] text-signal-dim decoration-signal/40 underline-offset-4 group-hover:underline"
                         >
                           {site.domain}
                         </span>

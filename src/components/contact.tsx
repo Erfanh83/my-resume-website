@@ -13,7 +13,8 @@ const EMAILJS = {
   publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
 };
 
-export function Contact({ c }: { c: Content }) {
+/* Only this section's strings — see the note on SiteHeader's props. */
+export function Contact({ contact }: { contact: Content["contact"] }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sendError, setSendError] = useState<string | null>(null);
@@ -31,12 +32,12 @@ export function Contact({ c }: { c: Content }) {
     };
 
     const found: Record<string, string> = {};
-    if (!values.from_name) found.from_name = c.contact.errors.name;
+    if (!values.from_name) found.from_name = contact.errors.name;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.from_email)) {
-      found.from_email = c.contact.errors.email;
+      found.from_email = contact.errors.email;
     }
-    if (!values.subject) found.subject = c.contact.errors.subject;
-    if (values.message.length < 10) found.message = c.contact.errors.message;
+    if (!values.subject) found.subject = contact.errors.subject;
+    if (values.message.length < 10) found.message = contact.errors.message;
 
     setErrors(found);
     if (Object.keys(found).length > 0) {
@@ -46,7 +47,7 @@ export function Contact({ c }: { c: Content }) {
 
     if (!EMAILJS.serviceId || !EMAILJS.templateId || !EMAILJS.publicKey) {
       setStatus("error");
-      setSendError(c.contact.errors.config);
+      setSendError(contact.errors.config);
       return;
     }
 
@@ -62,12 +63,12 @@ export function Contact({ c }: { c: Content }) {
       form.reset();
     } catch {
       setStatus("error");
-      setSendError(c.contact.errors.send);
+      setSendError(contact.errors.send);
     }
   }
 
   return (
-    <section id="contact" className="scroll-mt-24 py-24 sm:py-32" aria-label={c.contact.title}>
+    <section id="contact" className="render-lazy scroll-mt-24 py-24 sm:py-32" aria-label={contact.title}>
       <div className="shell">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
           {/* Reach me directly */}
@@ -75,19 +76,19 @@ export function Contact({ c }: { c: Content }) {
             <Reveal>
               <p className="label flex items-center gap-3 text-signal">
                 <span aria-hidden="true" className="h-px w-8 bg-signal/45" />
-                {c.contact.eyebrow}
+                {contact.eyebrow}
               </p>
               <h2 className="mt-5 text-balance font-display text-[clamp(2rem,4.6vw,3.25rem)] font-extrabold">
-                {c.contact.title}
+                {contact.title}
               </h2>
               <p className="mt-5 text-pretty text-[1.0625rem] leading-relaxed text-slate">
-                {c.contact.lede}
+                {contact.lede}
               </p>
             </Reveal>
 
             <Reveal delay={120}>
-              <ul className="mt-9 space-y-px overflow-hidden rounded-2xl border border-line bg-line">
-                {c.contact.links.map((link) => {
+              <ul className="mt-9 space-y-px overflow-hidden rounded-2xl border border-line bg-line lift">
+                {contact.links.map((link) => {
                   const Tag = link.href ? "a" : "div";
                   return (
                     <li key={link.id}>
@@ -139,33 +140,33 @@ export function Contact({ c }: { c: Content }) {
 
           {/* Form */}
           <Reveal delay={180} className="lg:col-span-7">
-            <div className="rounded-2xl border border-line bg-ink-2 p-6 sm:p-9">
-              <h3 className="font-display text-2xl font-bold">{c.contact.formTitle}</h3>
-              <p className="mt-2 text-sm text-slate">{c.contact.formLede}</p>
+            <div className="rounded-2xl border border-line bg-ink-2 p-6 lift sm:p-9">
+              <h3 className="font-display text-2xl font-bold">{contact.formTitle}</h3>
+              <p className="mt-2 text-sm text-slate">{contact.formLede}</p>
 
               <form onSubmit={handleSubmit} noValidate className="mt-8 space-y-6">
                 <div className="grid gap-6 sm:grid-cols-2">
                   <Field
                     name="from_name"
-                    label={c.contact.fields.name}
+                    label={contact.fields.name}
                     autoComplete="name"
                     error={errors.from_name}
                   />
                   <Field
                     name="from_email"
                     type="email"
-                    label={c.contact.fields.email}
+                    label={contact.fields.email}
                     autoComplete="email"
                     dir="ltr"
                     error={errors.from_email}
                   />
                 </div>
 
-                <Field name="subject" label={c.contact.fields.subject} error={errors.subject} />
+                <Field name="subject" label={contact.fields.subject} error={errors.subject} />
 
                 <Field
                   name="message"
-                  label={c.contact.fields.message}
+                  label={contact.fields.message}
                   textarea
                   error={errors.message}
                 />
@@ -178,10 +179,10 @@ export function Contact({ c }: { c: Content }) {
                     className="inline-flex items-center gap-2.5 rounded-full bg-signal px-7 py-3.5 font-semibold text-ink transition-transform duration-200 hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
                   >
                     {status === "sending"
-                      ? c.contact.sending
+                      ? contact.sending
                       : status === "sent"
-                        ? c.contact.sent
-                        : c.contact.send}
+                        ? contact.sent
+                        : contact.send}
                     {status === "sending" ? (
                       <span
                         aria-hidden="true"
@@ -202,7 +203,7 @@ export function Contact({ c }: { c: Content }) {
 
                   <p aria-live="polite" className="text-sm">
                     {status === "sent" ? (
-                      <span className="text-signal">{c.contact.sentNote}</span>
+                      <span className="text-signal">{contact.sentNote}</span>
                     ) : sendError ? (
                       <span className="text-amber">{sendError}</span>
                     ) : null}
@@ -248,7 +249,7 @@ function Field({
     suppressHydrationWarning: true,
     "aria-invalid": error ? true : undefined,
     "aria-describedby": error ? errorId : undefined,
-    className: `w-full rounded-xl border bg-ink-3 px-4 py-3 text-chalk placeholder:text-slate-dim/70 transition-colors duration-200 focus:outline-none focus-visible:border-signal ${
+    className: `w-full rounded-xl border bg-ink-3 px-4 light:bg-ink py-3 text-chalk placeholder:text-slate-dim/70 transition-colors duration-200 focus:outline-none focus-visible:border-signal ${
       error ? "border-amber/60" : "border-line"
     }`,
   };

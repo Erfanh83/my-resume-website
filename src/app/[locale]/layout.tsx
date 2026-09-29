@@ -13,7 +13,7 @@ const archivo = Archivo({
   subsets: ["latin"],
   variable: "--font-archivo",
   display: "swap",
-  weight: ["400", "600", "700", "800"],
+  weight: ["700", "800"],
 });
 
 /* Humanist-technical body face, from the same family as the mono. */
@@ -21,7 +21,7 @@ const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   variable: "--font-plex-sans",
   display: "swap",
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600"],
 });
 
 /* Data, statuses, domains, dates. */
@@ -32,12 +32,15 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
 });
 
-/* Persian, all roles. */
+/* Persian, all roles. Loaded as the variable font — one file per subset
+   covers every weight, where static weights meant four Arabic files.
+   Not preloaded: both locales share this layout, and a preload here would
+   make every English visitor download the Persian font too. */
 const vazir = Vazirmatn({
   subsets: ["arabic", "latin"],
   variable: "--font-vazir",
   display: "swap",
-  weight: ["300", "400", "500", "700", "800"],
+  preload: false,
 });
 
 export function generateStaticParams() {

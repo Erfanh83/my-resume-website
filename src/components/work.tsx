@@ -8,7 +8,7 @@ export function Work({ c }: { c: Content }) {
   const pipeline = c.sites.filter((s) => s.status !== "live");
 
   return (
-    <section id="work" className="scroll-mt-24 py-24 sm:py-32" aria-label={c.work.title}>
+    <section id="work" className="render-lazy scroll-mt-24 py-24 sm:py-32" aria-label={c.work.title}>
       <div className="shell">
         <SectionHead eyebrow={c.work.eyebrow} title={c.work.title} lede={c.work.lede} />
 
@@ -30,7 +30,7 @@ export function Work({ c }: { c: Content }) {
           {c.work.pipelineHeading}
         </h3>
 
-        <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+        <div className="mt-6 grid gap-px overflow-clip rounded-2xl border border-line bg-line lift sm:grid-cols-2">
           {pipeline.map((site, i) => (
             <Reveal key={site.id} delay={i * 90} className="bg-ink-2 p-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
@@ -70,14 +70,14 @@ function LiveCard({ site, c, delay }: { site: SiteEntry; c: Content; delay: numb
         href={site.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex h-full flex-col rounded-2xl border border-line bg-ink-2 p-6 transition-colors duration-300 hover:border-signal/35 sm:p-8"
+        className="group flex h-full flex-col rounded-2xl border border-line bg-ink-2 p-6 lift transition-colors duration-300 hover:border-signal/35 sm:p-8"
       >
         <div className="flex items-start justify-between gap-4">
           <div>
             <h4 className="font-display text-2xl font-extrabold tracking-tight">{site.name}</h4>
             <p
               dir="ltr"
-              className="mt-1.5 font-mono text-sm text-signal-dim decoration-signal/40 underline-offset-4 group-hover:underline"
+              className="mt-1.5 font-code text-sm text-signal-dim decoration-signal/40 underline-offset-4 group-hover:underline"
             >
               {site.domain}
             </p>

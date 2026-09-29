@@ -6,7 +6,7 @@ export function SiteFooter({ c, locale }: { c: Content; locale: Locale }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line py-10">
+    <footer className="render-lazy border-t border-line py-10">
       <div className="shell flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-slate">

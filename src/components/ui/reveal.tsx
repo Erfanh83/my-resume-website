@@ -1,57 +1,32 @@
-"use client";
-
-import { useEffect, useRef, type ElementType, type ReactNode } from "react";
+import type { CSSProperties, ElementType, ReactNode } from "react";
 
 interface RevealProps {
   children: ReactNode;
-  /** Stagger, in milliseconds, applied as a CSS custom property. */
+  /** Stagger, in milliseconds. Mapped onto the scroll range in globals.css. */
   delay?: number;
   className?: string;
   as?: ElementType;
 }
 
 /**
- * Reveals its children once, the first time they scroll into view.
- * The animation itself lives in globals.css so reduced-motion users
- * simply get the finished state.
+ * Fades its children in as they scroll into view.
+ *
+ * A server component on purpose: the effect is a CSS scroll-driven animation
+ * (see [data-reveal] in globals.css), so it ships no JavaScript, hydrates
+ * nothing, and never hides content while the page is still loading. Browsers
+ * without scroll timelines simply show everything.
  */
 export function Reveal({ children, delay = 0, className, as }: RevealProps) {
-  const ref = useRef<HTMLElement>(null);
   const Tag = (as ?? "div") as ElementType;
 
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    if (typeof IntersectionObserver === "undefined") {
-      node.dataset.shown = "true";
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            (entry.target as HTMLElement).dataset.shown = "true";
-            observer.unobserve(entry.target);
-          }
-        }
-      },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  /* ~100ms of stagger becomes 8% of the entry range, capped so late items in
+     a long list still finish revealing before they are fully on screen. */
+  const style = delay
+    ? ({ "--reveal-offset": `${Math.min(delay * 0.08, 32)}%` } as CSSProperties)
+    : undefined;
 
   return (
-    <Tag
-      ref={ref}
-      data-reveal=""
-      data-shown="false"
-      style={delay ? ({ "--reveal-delay": `${delay}ms` } as React.CSSProperties) : undefined}
-      className={className}
-    >
+    <Tag data-reveal="" style={style} className={className}>
       {children}
     </Tag>
   );

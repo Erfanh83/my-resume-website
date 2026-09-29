@@ -10,12 +10,13 @@ import { Reveal } from "./ui/reveal";
 /**
  * A full-bleed photographic breather between the card-heavy sections.
  * The scrims are drawn from the ink token, so the band melts into the page
- * in either theme instead of sitting in it as a rectangle.
+ * in the dark theme. In the light theme the band keeps dark tokens of its
+ * own (.dark-island) — a night photograph washed with paper only goes grey.
  */
 export function Workspace({ c, locale }: { c: Content; locale: Locale }) {
   return (
     <section
-      className="relative isolate flex min-h-[26rem] items-end overflow-hidden py-16 sm:min-h-[32rem] sm:py-20"
+      className="render-lazy dark-island relative isolate flex min-h-[26rem] items-end overflow-clip py-16 sm:min-h-[32rem] sm:py-20"
       aria-label={c.workspace.title}
     >
       <Image

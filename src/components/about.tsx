@@ -8,7 +8,7 @@ import { Term } from "./ui/term";
 
 export function About({ c }: { c: Content }) {
   return (
-    <section id="about" className="scroll-mt-24 py-24 sm:py-32" aria-label={c.about.title}>
+    <section id="about" className="render-lazy scroll-mt-24 py-24 sm:py-32" aria-label={c.about.title}>
       <div className="shell">
         {/* Portrait and narrative sit side by side and end together.
             Everything that used to hang below one column now runs full
@@ -57,7 +57,7 @@ export function About({ c }: { c: Content }) {
         </div>
 
         {/* Three equal panels, full width — languages, interests, research. */}
-        <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
+        <div className="mt-10 grid gap-px overflow-clip rounded-2xl border border-line bg-line lift md:grid-cols-3">
           <Reveal className="bg-ink-2 p-6 sm:p-7">
             <h3 className="label text-slate-dim">{c.about.languagesTitle}</h3>
             <dl className="mt-5 space-y-3">

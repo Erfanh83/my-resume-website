@@ -15,6 +15,28 @@ export const themeInitScript = `(function(){try{var k=${JSON.stringify(
   THEME_STORAGE_KEY,
 )};var s=localStorage.getItem(k);var t=s==="light"||s==="dark"?s:(window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`;
 
+/**
+ * Flips the palette in a single frame.
+ *
+ * Every element with a hover colour transition would otherwise animate its
+ * own colour change — hundreds of them, restyled on every frame — which is
+ * what made switching stall. So transitions are held off (.theme-instant)
+ * until the new palette has been painted, then handed back. Measured at 4x
+ * CPU throttle, this is ~0.14s to the new frame, against ~0.3s for a
+ * view-transition cross-fade and over 2s for the original colour fade.
+ */
+function applyTheme(next: Theme) {
+  const root = document.documentElement;
+  root.classList.add("theme-instant");
+  root.setAttribute("data-theme", next);
+  /* Force the restyle now, while transitions are off, so the new colours
+     become the start state instead of an animation target. */
+  void getComputedStyle(root).color;
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => root.classList.remove("theme-instant")),
+  );
+}
+
 export function ThemeToggle({ toLight, toDark }: { toLight: string; toDark: string }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
@@ -33,7 +55,7 @@ export function ThemeToggle({ toLight, toDark }: { toLight: string; toDark: stri
     const onChange = (e: MediaQueryListEvent) => {
       if (localStorage.getItem(THEME_STORAGE_KEY)) return;
       const next: Theme = e.matches ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
+      applyTheme(next);
       setTheme(next);
     };
     media.addEventListener("change", onChange);
@@ -42,20 +64,14 @@ export function ThemeToggle({ toLight, toDark }: { toLight: string; toDark: stri
 
   function toggle() {
     const next: Theme = theme === "light" ? "dark" : "light";
-    const root = document.documentElement;
+    applyTheme(next);
+    setTheme(next);
 
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      root.classList.add("theme-switching");
-      window.setTimeout(() => root.classList.remove("theme-switching"), 360);
-    }
-
-    root.setAttribute("data-theme", next);
     try {
       localStorage.setItem(THEME_STORAGE_KEY, next);
     } catch {
       /* Private mode or blocked storage — the switch still works for this visit. */
     }
-    setTheme(next);
   }
 
   /* The label names what the click will do, matching the icon. */

@@ -9,43 +9,44 @@ import { Reveal } from "./ui/reveal";
 
 type Filter = "all" | "web" | "ai";
 
-export function Projects({ c }: { c: Content }) {
+/* Only this section's strings — see the note on SiteHeader's props. */
+export function Projects({ projects }: { projects: Content["projects"] }) {
   const [filter, setFilter] = useState<Filter>("all");
 
   const filters: { id: Filter; label: string; count: number }[] = [
-    { id: "all", label: c.projects.filters.all, count: c.projects.items.length },
+    { id: "all", label: projects.filters.all, count: projects.items.length },
     {
       id: "web",
-      label: c.projects.filters.web,
-      count: c.projects.items.filter((p) => p.group === "web").length,
+      label: projects.filters.web,
+      count: projects.items.filter((p) => p.group === "web").length,
     },
     {
       id: "ai",
-      label: c.projects.filters.ai,
-      count: c.projects.items.filter((p) => p.group === "ai").length,
+      label: projects.filters.ai,
+      count: projects.items.filter((p) => p.group === "ai").length,
     },
   ];
 
   const shown =
-    filter === "all" ? c.projects.items : c.projects.items.filter((p) => p.group === filter);
+    filter === "all" ? projects.items : projects.items.filter((p) => p.group === filter);
 
   return (
     <section
       id="projects"
-      className="scroll-mt-24 py-24 sm:py-32"
-      aria-label={c.projects.title}
+      className="render-lazy scroll-mt-24 py-24 sm:py-32"
+      aria-label={projects.title}
     >
       <div className="shell">
         <SectionHead
-          eyebrow={c.projects.eyebrow}
-          title={c.projects.title}
-          lede={c.projects.lede}
+          eyebrow={projects.eyebrow}
+          title={projects.title}
+          lede={projects.lede}
         />
 
         <Reveal>
           <div
             role="tablist"
-            aria-label={c.projects.eyebrow}
+            aria-label={projects.eyebrow}
             className="mt-10 flex flex-wrap gap-2"
           >
             {filters.map((f) => {
@@ -76,7 +77,7 @@ export function Projects({ c }: { c: Content }) {
             <Reveal
               key={project.id}
               delay={Math.min(i, 5) * 70}
-              className="group flex h-full flex-col rounded-2xl border border-line bg-ink-2 p-6 transition-colors duration-300 hover:border-signal/30"
+              className="group flex h-full flex-col rounded-2xl border border-line bg-ink-2 p-6 lift transition-colors duration-300 hover:border-signal/30"
             >
               <span
                 className={`label w-fit rounded-full border px-2.5 py-1.5 ${
@@ -85,7 +86,7 @@ export function Projects({ c }: { c: Content }) {
                     : "border-line bg-ink-3 text-slate"
                 }`}
               >
-                {project.group === "web" ? c.projects.filters.web : c.projects.filters.ai}
+                {project.group === "web" ? projects.filters.web : projects.filters.ai}
               </span>
 
               <h3 className="mt-4 font-display text-xl font-bold">{project.title}</h3>

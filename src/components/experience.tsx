@@ -6,7 +6,7 @@ export function Experience({ c }: { c: Content }) {
   return (
     <section
       id="experience"
-      className="scroll-mt-24 py-24 sm:py-32"
+      className="render-lazy scroll-mt-24 py-24 sm:py-32"
       aria-label={c.experience.title}
     >
       <div className="shell">
@@ -16,7 +16,7 @@ export function Experience({ c }: { c: Content }) {
           lede={c.experience.lede}
         />
 
-        <ol className="mt-14 space-y-px overflow-hidden rounded-2xl border border-line bg-line">
+        <ol className="mt-14 space-y-px overflow-clip rounded-2xl border border-line bg-line lift">
           {c.experience.entries.map((entry, i) => (
             <Reveal key={entry.id} as="li" delay={i * 90} className="bg-ink-2">
               <article className="grid gap-x-8 gap-y-4 p-6 sm:p-8 lg:grid-cols-12">

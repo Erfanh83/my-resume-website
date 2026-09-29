@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+/* `light:` targets the light theme, for the few places where it needs a
+   different treatment rather than just different token values. */
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+
+@utility lift {
+  box-shadow: var(--shadow-lift);
+}
+
+/* Below-the-fold sections. The browser skips their layout and paint until
+   they near the viewport, so the first layout only covers what is on screen
+   — on load that was the single largest main-thread cost. `auto` in the
+   intrinsic size remembers each section's real height once it has rendered,
+   so the scrollbar settles instead of jumping. */
+@utility render-lazy {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 /* ═══════════════════════════════════════════════════════════
    DESIGN TOKENS — DARK (the brand default)
    Palette carried over from the previous site: near-black ground,
@@ -32,10 +50,19 @@
   --font-display: var(--font-archivo), "Archivo", system-ui, sans-serif;
   --font-body: var(--font-plex-sans), "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  /* Domains and other strictly Latin code-like strings. Never reassigned per
+     locale, unlike --font-mono, which Persian points at Vazirmatn. */
+  --font-code: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
   /* Never reassigned per locale — Latin runs inside Persian copy use this. */
   --font-latin: var(--font-plex-sans), "IBM Plex Sans", system-ui, sans-serif;
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  /* Cards float on paper in the light theme; on near-black a shadow only
+     muddies the edge, so dark keeps flat hairlines. */
+  --shadow-lift: none;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -46,24 +73,26 @@
    lightens in step, so bg-signal/text-ink stays dark-on-light-text.
    ═══════════════════════════════════════════════════════════ */
 :root[data-theme="light"] {
-  --color-ink: #f3f6f2;
+  --color-ink: #f4f6f1;
   --color-ink-2: #ffffff;
-  --color-ink-3: #eaeee7;
-  --color-ink-4: #e1e7dd;
-  --color-line: #d5dcd1;
+  --color-ink-3: #eef1eb;
+  --color-ink-4: #e3e8df;
+  --color-line: #dde3d8;
 
-  --color-signal: #00854a;
-  --color-signal-dim: #046b3d;
-  --color-signal-deep: #dcf3e6;
+  --color-signal: #047a45;
+  --color-signal-dim: #05673b;
+  --color-signal-deep: #e2f4ea;
 
   --color-amber: #8a5a00;
-  --color-amber-deep: #fbeed3;
+  --color-amber-deep: #fcf1d9;
 
-  --color-chalk: #0c1410;
-  --color-slate: #4f5f55;
-  --color-slate-dim: #6f7f74;
+  --color-chalk: #0d1611;
+  --color-slate: #465a4d;
+  --color-slate-dim: #627267;
 
-  --color-grid: #0c141012;
+  --color-grid: #0d16110d;
+
+  --shadow-lift: 0 1px 2px rgb(13 22 17 / 0.04), 0 12px 32px -18px rgb(13 22 17 / 0.16);
 
   color-scheme: light;
 }
@@ -83,6 +112,10 @@
 :root[lang="fa"] {
   --font-display: var(--font-vazir), "Vazirmatn", system-ui, sans-serif;
   --font-body: var(--font-vazir), "Vazirmatn", system-ui, sans-serif;
+  /* Mono runs in Persian are tags and dates — Persian text. Plex Mono cannot
+     go first: next/font's metric fallback for it (Courier New) carries Arabic
+     glyphs and would win over Vazirmatn. Latin domains use --font-code. */
+  --font-mono: var(--font-vazir), "Vazirmatn", ui-monospace, monospace;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -267,12 +300,6 @@
     }
   }
 
-  /* A near-black photograph sitting on paper is a strong note; ease it a
-     little so it reads as a panel rather than a hole. */
-  :root[data-theme="light"] .hero-photo {
-    opacity: 0.88;
-  }
-
   /* Full-bleed photographic band. Scrims come from the ink token, so the
      band melts into whichever theme is showing. */
   .band-scrim {
@@ -298,50 +325,127 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   THEME SWITCHING
-   Colour transitions are opt-in: the class is added for the length of
-   one switch, so page load and scrolling never pay for them.
+   LIGHT-THEME OVERRIDES
+   Unlayered on purpose: these reshape elements that Tailwind utilities
+   already position, and unlayered rules outrank every @layer.
    ═══════════════════════════════════════════════════════════ */
-.theme-switching,
-.theme-switching *,
-.theme-switching *::before,
-.theme-switching *::after {
-  transition:
-    background-color 0.32s var(--ease-out-quint),
-    border-color 0.32s var(--ease-out-quint),
-    color 0.32s var(--ease-out-quint),
-    fill 0.32s var(--ease-out-quint) !important;
+/* LIGHT HERO
+   A near-black photograph cannot dissolve into paper: every fade passes
+   through a band of muddy grey. So on the light theme the photo stops
+   pretending to be the background and becomes a framed print instead —
+   unmasked, rounded, lifted off the page. */
+:root[data-theme="light"] .hero-media {
+  inset-inline: 1.25rem;
+  top: 5rem;
+  height: 15rem;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  box-shadow:
+    0 1px 2px rgb(13 22 17 / 0.06),
+    0 30px 60px -30px rgb(13 22 17 / 0.45);
+}
+:root[data-theme="light"] .hero-media .hero-photo {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+:root[data-theme="light"] .hero-tint {
+  display: none;
+}
+@media (min-width: 640px) {
+  :root[data-theme="light"] .hero-media {
+    inset-inline: 2rem;
+    top: 6rem;
+    height: 17rem;
+  }
+}
+@media (min-width: 1024px) {
+  /* Aligned to the shell's inline-end edge, beside the text column. */
+  :root[data-theme="light"] .hero-media {
+    inset-inline-start: auto;
+    inset-inline-end: max(3rem, calc((100vw - 78rem) / 2 + 3rem));
+    top: 8rem;
+    bottom: auto;
+    height: auto;
+    width: min(34%, 26rem);
+    aspect-ratio: 4 / 5;
+    border-radius: 2rem;
+  }
+}
+
+/* The workspace band stays a dark island in the light theme: the photo
+   is a night scene, and washing it with paper only turns it grey. Local
+   dark tokens make its text, scrims and pill correct with no extra rules. */
+:root[data-theme="light"] .dark-island {
+  --color-ink: #050905;
+  --color-ink-2: #090f09;
+  --color-ink-3: #0e160e;
+  --color-line: #1f2c1f;
+  --color-signal: #00ff88;
+  --color-signal-dim: #00c46b;
+  --color-chalk: #e8f0e8;
+  --color-slate: #a3b4a3;
+  --color-slate-dim: #6f816f;
+  color: var(--color-chalk);
+  background-color: var(--color-ink);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   THEME SWITCHING
+   Held on <html> for the two frames of a switch (see applyTheme in
+   theme-toggle.tsx). Without it, every hover transition on the page would
+   animate its own colour change at once. The toggle's icons keep theirs.
+   ═══════════════════════════════════════════════════════════ */
+.theme-instant *:not(.theme-icon),
+.theme-instant *::before,
+.theme-instant *::after {
+  transition: none !important;
 }
 
 /* ═══════════════════════════════════════════════════════════
    MOTION
-   One shared reveal, driven by an IntersectionObserver that sets
-   data-shown. Anything decorative stops entirely under
-   prefers-reduced-motion.
+   One shared reveal, as a scroll-driven animation: the browser ties it to
+   scroll position itself, so it needs no JavaScript and runs off the main
+   thread. Content is never hidden while the page loads — anything already
+   on screen is past its range and shows in its final state, and browsers
+   without scroll timelines show everything. Decorative motion stops
+   entirely under prefers-reduced-motion.
+
+   Containers around revealed items use overflow: clip, not hidden —
+   overflow: hidden makes an element a scroll container, which would hijack
+   the view() timeline of everything inside it.
    ═══════════════════════════════════════════════════════════ */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s var(--ease-out-quint),
-    transform 0.7s var(--ease-out-quint);
-  transition-delay: var(--reveal-delay, 0ms);
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-[data-reveal][data-shown="true"] {
-  opacity: 1;
-  transform: none;
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-reveal] {
+      animation: reveal both var(--ease-out-quint);
+      animation-timeline: view();
+      animation-range:
+        entry var(--reveal-offset, 0%)
+        entry calc(var(--reveal-offset, 0%) + 70%);
+    }
+  }
 }
 
+/* Opacity only: it runs on the compositor. The old box-shadow ring forced a
+   repaint of every live dot on every frame, forever. */
 @keyframes pulse-dot {
   0%,
   100% {
     opacity: 1;
-    box-shadow: 0 0 0 0 currentColor;
   }
   50% {
-    opacity: 0.75;
-    box-shadow: 0 0 0 4px transparent;
+    opacity: 0.35;
   }
 }
 
@@ -386,10 +490,5 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-
-  [data-reveal] {
-    opacity: 1;
-    transform: none;
   }
 }

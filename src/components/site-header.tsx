@@ -10,17 +10,22 @@ import { ThemeToggle } from "./theme-toggle";
 
 const SECTION_IDS = ["work", "experience", "projects", "stack", "about", "contact"] as const;
 
-export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
+/* Receives only the nav strings: a client component's props are serialised
+   into the page, so passing the whole Content object would ship all of it. */
+export function SiteHeader({ locale, nav }: { locale: Locale; nav: Content["nav"] }) {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string>("");
   const lastY = useRef(0);
+  const progressRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   /* Scroll state: solid background, reading progress, and hide-on-scroll-down
-     so the header gets out of the way while reading and returns on intent. */
+     so the header gets out of the way while reading and returns on intent.
+     Progress is written straight to the bar's style: it changes on every
+     frame, and routing it through state re-rendered the whole header each
+     time. The two booleans only re-render when they actually flip. */
   useEffect(() => {
     let frame = 0;
 
@@ -29,7 +34,9 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
       const max = document.documentElement.scrollHeight - window.innerHeight;
 
       setScrolled(y > 16);
-      setProgress(max > 0 ? Math.min(1, y / max) : 0);
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
+      }
       setHidden(y > 320 && y > lastY.current);
       lastY.current = y;
       frame = 0;
@@ -107,7 +114,7 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
     history.replaceState(null, "", window.location.pathname);
   }, []);
 
-  const links = SECTION_IDS.map((id) => ({ id, label: c.nav[id] }));
+  const links = SECTION_IDS.map((id) => ({ id, label: nav[id] }));
 
   return (
     <>
@@ -115,7 +122,7 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
         href="#main"
         className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:start-4 focus-visible:z-[70] focus-visible:rounded-full focus-visible:bg-signal focus-visible:px-5 focus-visible:py-2.5 focus-visible:text-sm focus-visible:font-semibold focus-visible:text-ink"
       >
-        {c.nav.skipToContent}
+        {nav.skipToContent}
       </a>
 
       <header
@@ -123,7 +130,7 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
           hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"
         } ${
           scrolled || menuOpen
-            ? "border-b border-line bg-ink/80 backdrop-blur-xl"
+            ? "border-b border-line bg-ink/85 backdrop-blur-md"
             : "border-b border-transparent"
         }`}
       >
@@ -132,21 +139,21 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
           <a
             href="#"
             onClick={toTop}
-            aria-label={c.nav.backToTop}
+            aria-label={nav.backToTop}
             className="group flex shrink-0 items-center gap-2.5"
           >
             <span className="latin relative flex h-9 w-9 items-center justify-center rounded-xl border border-line bg-ink-2 font-display text-[0.8rem] font-extrabold tracking-tight text-signal transition-colors duration-300 group-hover:border-signal/45">
               EH
             </span>
             <span className="hidden font-display text-[0.95rem] font-bold tracking-tight sm:block ltr:tracking-[0.02em]">
-              {c.nav.wordmark}
+              {nav.wordmark}
             </span>
           </a>
 
           {/* Desktop nav */}
           <nav
             className="hidden items-center lg:flex"
-            aria-label={c.nav.sectionsLabel}
+            aria-label={nav.sectionsLabel}
           >
             {links.map((link) => {
               const isActive = active === link.id;
@@ -172,9 +179,9 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
           </nav>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            <ThemeToggle toLight={c.nav.themeToLight} toDark={c.nav.themeToDark} />
+            <ThemeToggle toLight={nav.themeToLight} toDark={nav.themeToDark} />
 
-            <LocaleSwitch locale={locale} pathname={pathname} label={c.nav.languageLabel} />
+            <LocaleSwitch locale={locale} pathname={pathname} label={nav.languageLabel} />
 
             <a
               href={withBase("/resume.pdf")}
@@ -182,7 +189,7 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
               rel="noopener noreferrer"
               className="hidden rounded-full bg-signal px-4 py-2 text-sm font-semibold text-ink transition-transform duration-200 hover:scale-[1.04] sm:block"
             >
-              {c.nav.resume}
+              {nav.resume}
             </a>
 
             <button
@@ -190,7 +197,7 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
               onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
-              aria-label={menuOpen ? c.nav.close : c.nav.menu}
+              aria-label={menuOpen ? nav.close : nav.menu}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-chalk transition-colors duration-200 hover:border-signal/40 lg:hidden"
             >
               <span aria-hidden="true" className="relative block h-3.5 w-4">
@@ -220,20 +227,21 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
           className={`h-px origin-[left_center] bg-signal transition-opacity duration-300 rtl:origin-[right_center] ${
             scrolled ? "opacity-100" : "opacity-0"
           }`}
-          style={{ transform: `scaleX(${progress})` }}
+          ref={progressRef}
+          style={{ transform: "scaleX(0)" }}
         />
       </header>
 
       {/* Mobile sheet */}
       <div
         id="mobile-nav"
-        className={`fixed inset-0 z-40 bg-ink/97 backdrop-blur-2xl transition-opacity duration-300 lg:hidden ${
-          menuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        className={`fixed inset-0 z-40 bg-ink/98 transition-[opacity,visibility] duration-300 lg:hidden ${
+          menuOpen ? "visible opacity-100" : "pointer-events-none invisible opacity-0"
         }`}
         aria-hidden={!menuOpen}
       >
         <nav
-          aria-label={c.nav.sectionsLabel}
+          aria-label={nav.sectionsLabel}
           className="shell flex h-full flex-col justify-center gap-0 overflow-y-auto overscroll-contain pb-10 pt-20"
         >
           {links.map((link, i) => (
@@ -267,7 +275,7 @@ export function SiteHeader({ locale, c }: { locale: Locale; c: Content }) {
               menuOpen ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
             }`}
           >
-            {c.nav.resume}
+            {nav.resume}
           </a>
 
           <a

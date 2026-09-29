@@ -14,7 +14,15 @@ import { Stack } from "@/components/stack";
 import { Work } from "@/components/work";
 import { Workspace } from "@/components/workspace";
 import { getContent } from "@/lib/content";
-import { isLocale } from "@/lib/i18n";
+import { isLocale, locales } from "@/lib/i18n";
+
+/* Repeated from the layout on purpose: with `output: "export"` the dev server
+   checks each page's own params and rejects /fa/ if only the layout lists it. */
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export const dynamicParams = false;
 
 export default async function HomePage({
   params,
@@ -54,7 +62,7 @@ export default async function HomePage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
 
-      <SiteHeader locale={locale} c={c} />
+      <SiteHeader locale={locale} nav={c.nav} />
 
       <main id="main" tabIndex={-1}>
         <Hero c={c} />
@@ -73,13 +81,13 @@ export default async function HomePage({
         {/* Photographic breather between the two densest sections. */}
         <Workspace c={c} locale={locale} />
 
-        <Projects c={c} />
+        <Projects projects={c.projects} />
         <Rule />
         <Stack c={c} />
         <Rule />
         <About c={c} />
         <Rule />
-        <Contact c={c} />
+        <Contact contact={c.contact} />
       </main>
 
       <SiteFooter c={c} locale={locale} />
