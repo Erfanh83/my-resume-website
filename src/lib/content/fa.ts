@@ -148,17 +148,6 @@ export const fa: Content = {
       stack: ["Next.js", "TypeScript", "Tailwind CSS", "سئو"],
     },
     {
-      id: "hebemys",
-      name: "کافه هبمیس",
-      domain: "hebemys.com",
-      url: "https://hebemys.com",
-      kind: "کافه",
-      status: "live",
-      summary:
-        "سایتی که محورش منو و حال‌وهوای کافه است؛ با تمرکز بر دسترس‌پذیری، سرعت بارگذاری و چیدمانی که از مانیتورهای عریض تا گوشیِ توی یک دست، همه‌جا درست نمایش داده شود.",
-      stack: ["React", "ریسپانسیو", "دسترس‌پذیری", "سرعت بالا"],
-    },
-    {
       id: "vanil",
       name: "کافه وانیل",
       domain: "vanilhmd.ir",
@@ -173,11 +162,13 @@ export const fa: Content = {
     {
       id: "casablanca",
       name: "کافه کازابلانکا",
+      domain: "lcasablancal.ir",
+      url: "https://lcasablancal.ir",
       kind: "کافه",
       location: "همدان",
-      status: "qa",
+      status: "live",
       summary:
-        "طراحی و توسعه کامل سایت برای یک کافه در همدان که اکنون در مرحله تست نهایی و راه‌اندازی است.",
+        "طراحی و توسعه کامل سایت برای یک کافه در همدان: منو، معرفی برند و چیدمانی که برای گوشی، سر میز، طراحی شده است.",
       stack: ["Next.js", "Tailwind CSS", "منوی دیجیتال"],
     },
     {

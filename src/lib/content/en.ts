@@ -145,17 +145,6 @@ export const en: Content = {
       stack: ["Next.js", "TypeScript", "Tailwind CSS", "SEO"],
     },
     {
-      id: "hebemys",
-      name: "Hebemys Café",
-      domain: "hebemys.com",
-      url: "https://hebemys.com",
-      kind: "Café",
-      status: "live",
-      summary:
-        "A café site built around the menu and the room. Tuned for accessibility, load speed, and a layout that holds up on every screen from a wide desktop to a phone held one-handed.",
-      stack: ["React", "Responsive UI", "Accessibility", "Performance"],
-    },
-    {
       id: "vanil",
       name: "Vanil Café",
       domain: "vanilhmd.ir",
@@ -170,11 +159,13 @@ export const en: Content = {
     {
       id: "casablanca",
       name: "Casablanca Café",
+      domain: "lcasablancal.ir",
+      url: "https://lcasablancal.ir",
       kind: "Café",
       location: "Hamedan",
-      status: "qa",
+      status: "live",
       summary:
-        "Full design and development for a café brand in Hamedan. Currently in final testing and deployment.",
+        "Full design and development for a café brand in Hamedan: the menu, the brand, and a layout built for a phone held at the table.",
       stack: ["Next.js", "Tailwind CSS", "Menu system"],
     },
     {
