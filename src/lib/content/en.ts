@@ -195,6 +195,15 @@ export const en: Content = {
         "A business site built around services, brand presentation, and direct customer contact.",
       stack: ["React", "Tailwind CSS", "Contact flows"],
     },
+    {
+      id: "sadrolemareh",
+      name: "Sadr-ol-Emareh Dizi House",
+      kind: "Restaurant",
+      status: "build",
+      summary:
+        "A site for a traditional dizi restaurant, built around the menu, the atmosphere of the place, and an easy way to find and reach it.",
+      stack: ["Digital menu", "Responsive UI"],
+    },
   ],
 
   experience: {
